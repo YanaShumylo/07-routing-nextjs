@@ -12,6 +12,7 @@ axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 axios.defaults.headers.common['Authorization'] = myApiKey;
 
 interface FetchNotesParams{
+   tagId?: string;
     page?: number;
     perPage?: number;
     search?: string;
@@ -28,13 +29,24 @@ interface FetchNotesApiResponse{
  notes: Note[];
   totalPages: number;
 }
+
+export type Tag = {
+  id: string;
+    title: string;
+    content: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
 export const fetchNotes = async ({
+  tagId,
   search,
   page = 1,
   perPage = 12
 }: FetchNotesParams): Promise<NotesResponse> => {
-  const response = await axios.get<FetchNotesApiResponse>('/notes', {
+  const res = await axios.get<FetchNotesApiResponse>('/notes', {
     params: {
+      tagId,
       page,
       perPage,
       ...(search?.trim() ? { search } : {}),
@@ -44,10 +56,11 @@ export const fetchNotes = async ({
   return {
     page,
     perPage,
-    data: response.data.notes,
-    totalPages: response.data.totalPages,
+    data: res.data.notes,
+    totalPages: res.data.totalPages,
         };
     };
+
 
 export const createNote = async (noteData: NewNoteData): Promise<Note> => {
   try {
@@ -87,4 +100,9 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
     handleApiError(error, "fetch note");
     throw error;
   }
+};
+
+export const getNotesTags = async () => {
+  const res = await axios<Tag[]>('/tags');
+  return res.data;
 };

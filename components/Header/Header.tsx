@@ -1,7 +1,12 @@
 import css from "./Header.module.css";
 import Link from "next/link";
+import {getNotesTags} from "../../lib/api";
+import TagsMenu from "../TagsMenu/TagsMenu";
 
-const Header = () => {return(
+const Header = async() => {
+  const tags = await getNotesTags();
+
+  return (
   <header className={css.header}>
     <Link href="/" aria-label="Home">
       NoteHub
@@ -12,7 +17,8 @@ const Header = () => {return(
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="/notes">Notes</Link>
+          <TagsMenu tags={tags} />
+          {/* <Link href="/notes">Notes</Link> */}
         </li>
       </ul>
     </nav>

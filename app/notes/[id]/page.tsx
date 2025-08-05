@@ -4,11 +4,11 @@ import NoteDetailsClient from "./NoteDetails.client";
 
 
 type Props = {
-  params: Promise<{ id: string }>
-}
+  params: { id: string };
+};
 
 const NoteDetails = async ({ params }: Props) => {
-  const { id } = await params
+  const { id } = params;
 
   const queryClient = new QueryClient()
 
@@ -24,6 +24,6 @@ const NoteDetails = async ({ params }: Props) => {
   )
 }
 
-export default NoteDetails
+export default NoteDetails;
 
 
