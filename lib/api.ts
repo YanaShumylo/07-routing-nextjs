@@ -12,7 +12,7 @@ axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 axios.defaults.headers.common['Authorization'] = myApiKey;
 
 interface FetchNotesParams{
-   tagId?: string;
+   tag?: string;
     page?: number;
     perPage?: number;
     search?: string;
@@ -39,14 +39,14 @@ export type Tag = {
 }
 
 export const fetchNotes = async ({
-  tagId,
+  tag,
   search,
   page = 1,
   perPage = 12
 }: FetchNotesParams): Promise<NotesResponse> => {
   const res = await axios.get<FetchNotesApiResponse>('/notes', {
     params: {
-      tagId,
+      tag,
       page,
       perPage,
       ...(search?.trim() ? { search } : {}),
@@ -102,7 +102,23 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
   }
 };
 
-export const getNotesTags = async () => {
-  const res = await axios<Tag[]>('/tags');
-  return res.data;
+// export const fetchNote = async (id: string): Promise<Note> => {
+//   try {
+//     const res = await axios.get<{ note: Note }>(`/notes/${id}`);
+//     return res.data.note;
+//   } catch (error) {
+//     handleApiError(error, "fetch note");
+//     throw error;
+//   }
+// };
+
+export const getNotesTags = async (): Promise<Tag[]> => {
+   const tags: Tag[] = [
+    { id: "Work", title: "Work", content: "", createdAt: "", updatedAt: "" },
+    { id: "Personal", title: "Personal", content: "", createdAt: "", updatedAt: "" },
+    { id: "Meeting", title: "Meeting", content: "", createdAt: "", updatedAt: "" },
+    { id: "Shopping", title: "Shopping", content: "", createdAt: "", updatedAt: "" },
+    { id: "Todo", title: "Todo", content: "", createdAt: "", updatedAt: "" },
+  ];
+  return tags;
 };

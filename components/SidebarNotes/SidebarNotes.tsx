@@ -2,17 +2,17 @@ import Link from "next/link";
 import {getNotesTags} from "../../lib/api";
 import css from "./SidebarNotes.module.css";
 
-interface SidebarProps {
-  isOpen: boolean;
-}
+const SidebarNotes = async () => {
+    const tags = await getNotesTags();
 
-const SidebarNotes = async ({ isOpen }: SidebarProps) => {
-    if (!isOpen) return null;
-
-    const tags = await getNotesTags();    
     return (
      <ul className={css.menuList}>
-                    {/* список тегів */}
+            {/* список тегів */}
+            <li className={css.menuItem}>
+        <Link href="/notes/filter/all" className={css.menuLink}>
+          All notes
+                </Link>
+                </li>
             {tags.map((tag) => (
                 <li key={tag.id} className={css.menuItem}>
                     <Link href={`/notes/filter/${tag.id}`} className={css.menuLink}>

@@ -1,23 +1,33 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import Modal from "@/components/Modal/Modal";
-import NotePreview from "@/components/NotePreview/NotePreview";
+import Modal from "../../../../components/Modal/Modal";
+import NotePreview from "../../../../components/NotePreview/NotePreview";
 
 type Props = {
+  note: {
   id: string;
+  title: string;
+    content: string;
+};
 };
 
-export default function NoteClient({ id }: Props) {
+export default function NoteClient({ note}: Props) {
   const router = useRouter();
 
   const handleClose = () => {
     router.back();
   };
-
+if (!note) {
+    return (
+      <Modal onClose={handleClose}>
+        <p>Note not found.</p>
+      </Modal>
+    );
+  }
   return (
     <Modal onClose={handleClose}>
-      <NotePreview id={id} />
+      <NotePreview note={note} />
     </Modal>
   );
 }

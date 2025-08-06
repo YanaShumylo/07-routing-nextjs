@@ -1,16 +1,17 @@
-import { fetchNoteById } from "@/lib/api";
+// import { fetchNoteById } from "@/lib/api";
+import css from "./NotePreview.module.css";
 
-type Props = {
+type Note = {
   id: string;
+  title: string;
+  content: string;
 };
 
-export default async function NotePreview({ id }: Props) {
-  const note = await fetchNoteById(id);
-
-  return (
-    <div>
-      <h2>{note.title}</h2>
-      <p>{note.content}</p>
+export default function NotePreview({ note }: { note: Note }) {
+    return (
+    <div className={css.container}>
+      <h2 className={css.header}>{note.title}</h2>
+      <p className={css.content}>{note.content}</p>
     </div>
   );
 }

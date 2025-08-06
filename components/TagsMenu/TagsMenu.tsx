@@ -27,9 +27,9 @@ const TagsMenu = ({ tags }: Props) => {
                     </li>
                     {tags.map((tag) => (
                         <li key={tag.id} className={css.menuItem}>
-                            <Link href={`/notes/filter/${tag.id}`} > <a className={css.menuLink} onClick={toggle}>
-                                {tag.title}</a>
-                            </Link>
+                           <Link href={`/notes/filter/${tag.id}`} onClick={toggle} className={css.menuLink}>
+  {tag.title}
+</Link>
                         </li>
                     )
                     )
