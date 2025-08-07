@@ -27,7 +27,7 @@ if (!note) {
   }
   return (
     <Modal onClose={handleClose}>
-      <NotePreview note={note} />
+      <NotePreview note={note} onClose={handleClose}  />
     </Modal>
   );
 }

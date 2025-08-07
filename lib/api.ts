@@ -102,23 +102,19 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
   }
 };
 
-// export const fetchNote = async (id: string): Promise<Note> => {
-//   try {
-//     const res = await axios.get<{ note: Note }>(`/notes/${id}`);
-//     return res.data.note;
-//   } catch (error) {
-//     handleApiError(error, "fetch note");
-//     throw error;
-//   }
-// };
 
 export const getNotesTags = async (): Promise<Tag[]> => {
-   const tags: Tag[] = [
+  try {
+    const tags: Tag[] = [
     { id: "Work", title: "Work", content: "", createdAt: "", updatedAt: "" },
     { id: "Personal", title: "Personal", content: "", createdAt: "", updatedAt: "" },
     { id: "Meeting", title: "Meeting", content: "", createdAt: "", updatedAt: "" },
     { id: "Shopping", title: "Shopping", content: "", createdAt: "", updatedAt: "" },
     { id: "Todo", title: "Todo", content: "", createdAt: "", updatedAt: "" },
   ];
-  return tags;
+    return tags;
+    } catch (error) {
+    handleApiError(error, "get tags");
+    throw error;
+  }
 };

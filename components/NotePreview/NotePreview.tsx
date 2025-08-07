@@ -7,10 +7,18 @@ type Note = {
   content: string;
 };
 
-export default function NotePreview({ note }: { note: Note }) {
+interface Props {
+  note: Note;
+  onClose: () => void;
+} 
+
+export default function NotePreview({ note, onClose }: Props) {
     return (
-    <div className={css.container}>
-      <h2 className={css.header}>{note.title}</h2>
+      <div className={css.container}>
+        <div className={css.header}>         
+          <h2>{note.title}</h2>
+          <button onClick={onClose} className={css.backBtn}>Close</button> 
+      </div>
       <p className={css.content}>{note.content}</p>
     </div>
   );
