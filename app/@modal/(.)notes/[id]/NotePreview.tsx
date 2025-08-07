@@ -1,5 +1,5 @@
 // import { fetchNoteById } from "@/lib/api";
-import css from "./NotePreview.module.css";
+import css from "../../../../components/NotePreview/NotePreview.module.css";
 
 type Note = {
   id: string;
