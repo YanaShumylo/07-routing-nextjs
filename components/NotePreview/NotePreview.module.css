@@ -65,4 +65,8 @@
   text-decoration: underline;
   display: inline-block;
   background-color: transparent;
-}
+  }
+
+.backBtn:hover {
+  color: #0b5ed7;;
+  }
