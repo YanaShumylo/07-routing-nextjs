@@ -28,7 +28,7 @@ export default function NotesClient({ initialData, tag }: NotesClientProps) {
  
   useEffect(() => {
     setCurrentPage(1);
-  }, [debouncedSearch]);
+  }, [search]);
 
   const {
     data,
@@ -37,7 +37,7 @@ export default function NotesClient({ initialData, tag }: NotesClientProps) {
     error,
     isFetching
   } = useQuery({
-    queryKey: ["notes", tag, debouncedSearch, currentPage],
+    queryKey: ["notes", tag, currentPage, debouncedSearch],
     queryFn: () => fetchNotes({
       tag,
       search: debouncedSearch,

@@ -1,5 +1,6 @@
-import SidebarNotes from "../../../../components/SidebarNotes/SidebarNotes"
+import SidebarNotes from "../../../../components/SidebarNotes/SidebarNotes";
 
-const NotesSidebar = async () => {
-return <SidebarNotes/>;};
-export default NotesSidebar;
+export default function NotesSidebar() {
+  return <SidebarNotes />;
+}
+

@@ -2,13 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-
-import { Tag } from '../../lib/api';
 import css from './TagsMenu.module.css';
 
-type Props = { tags: Tag[]; };
+const fixedTags = ['All', 'Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
-const TagsMenu = ({ tags }: Props) => {
+const TagsMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
@@ -20,15 +18,10 @@ const TagsMenu = ({ tags }: Props) => {
             {isOpen && (
                 <ul className={css.menuList}>
                     {/* список тегів */}
-                    <li className={css.menuItem}>
-                        <Link href={`/notes/filter/all`} onClick={toggle} className={css.menuLink}>
-                            All notes
-                        </Link>
-                    </li>
-                    {tags.map((tag) => (
-                        <li key={tag.id} className={css.menuItem}>
-                           <Link href={`/notes/filter/${tag.id}`} onClick={toggle} className={css.menuLink}>
-  {tag.title}
+                    {fixedTags.map((tag) => (
+                        <li key={tag} className={css.menuItem}>
+                           <Link href={`/notes/filter/${tag}`} onClick={toggle} className={css.menuLink}>
+  {tag}
 </Link>
                         </li>
                     )

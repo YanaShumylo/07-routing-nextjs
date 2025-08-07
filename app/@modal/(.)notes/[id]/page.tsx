@@ -1,46 +1,27 @@
-import NoteClient from './NoteClient';
+// import NoteClient from './NoteClient';
+import NotePreview from './NotePreview.client'
 import { fetchNoteById } from "../../../../lib/api";
-
+import { QueryClient, dehydrate } from '@tanstack/react-query';
+import { HydrationBoundary } from '@tanstack/react-query';
 
 interface NoteDetailsProps {
   params: Promise<{ id: string }>;
 }
 export default async function NoteModalPage({ params }: NoteDetailsProps) {
   const { id } = await params;
-  const note = await fetchNoteById(id);
-  return <NoteClient note={note} />;
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['note', id],
+    queryFn: () => fetchNoteById(id),
+  });
+
+  const dehydratedState = dehydrate(queryClient);
+  
+  return (
+     <HydrationBoundary state={dehydratedState}>
+      <NotePreview id={id} />
+    </HydrationBoundary>
+  );
 }
 
-// interface Props {
-//   params: { id: string };
-// };
-
-// export default async function NoteModalPage({ params }: Props) {
-//   const note = await fetchNoteById(params.id);
-//   return <NoteClient note={note} />;
-// }
-
-// export default async function NoteModalPage({
-//   params,
-// }: {
-//   params: Promise<{ id: string }>;
-// }) {
-//   const { id } = await params;
-//   const note = await fetchNoteById(id);
-//   return <NoteClient note={note} />;
-// }
-
-// const NoteModalPage = async ({ params }: Props) => {
-//   const note = await fetchNoteById(params.id);
-//   return <NoteClient note={note} />;
-// }
-// export default NoteModalPage;
-
-// export default async function NoteModalPage({
-//   params,
-// }: {
-//   params: { id: string };
-// }) {
-//   const note = await fetchNoteById(params.id);
-//   return <NoteClient note={note} />;
-// }

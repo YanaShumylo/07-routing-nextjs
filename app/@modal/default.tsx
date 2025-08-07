@@ -1,3 +1,3 @@
 const Modal = async () => {
-return <div>Modal</div>;};
+    return null; };
 export default Modal;

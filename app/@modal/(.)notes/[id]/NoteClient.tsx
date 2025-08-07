@@ -1,33 +1,44 @@
-'use client';
+// 'use client';
 
-import { useRouter } from "next/navigation";
-import Modal from "../../../../components/Modal/Modal";
-import NotePreview from "./NotePreview.client";
+// import { useRouter } from "next/navigation";
+// import Modal from "../../../../components/Modal/Modal";
+// import NotePreview from "./NotePreview.client";
+// import { useQuery } from "@tanstack/react-query";
+// import { fetchNoteById } from "../../../../lib/api";
 
-type Props = {
-  note: {
-  id: string;
-  title: string;
-    content: string;
-};
-};
+// type Props = {
+//   id: string;
+//  };
 
-export default function NoteClient({ note}: Props) {
-  const router = useRouter();
+// export default function NoteClient({ id}: Props) {
+//   const router = useRouter();
 
-  const handleClose = () => {
-    router.back();
-  };
-if (!note) {
-    return (
-      <Modal onClose={handleClose}>
-        <p>Note not found.</p>
-      </Modal>
-    );
-  }
-  return (
-    <Modal onClose={handleClose}>
-      <NotePreview note={note} onClose={handleClose}  />
-    </Modal>
-  );
-}
+// const { data: note, isLoading, isError } = useQuery({
+//     queryKey: ['note', id],
+//     queryFn: () => fetchNoteById(id),
+// });
+  
+//   const handleClose = () => {
+//     router.back();
+//   };
+// if (isLoading) {
+//     return (
+//       <Modal onClose={handleClose}>
+//         <p>Loading...</p>
+//       </Modal>
+//     );
+//   }
+
+// if (isError || !note) {
+//     return (
+//       <Modal onClose={handleClose}>
+//         <p>Note not found.</p>
+//       </Modal>
+//     );
+//   }
+//   return (
+//     <Modal onClose={handleClose}>
+//       <NotePreview note={note} onClose={handleClose}  />
+//     </Modal>
+//   );
+// }
