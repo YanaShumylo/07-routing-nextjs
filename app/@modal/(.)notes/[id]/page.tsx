@@ -1,11 +1,13 @@
 import NoteClient from './NoteClient';
 import { fetchNoteById } from "../../../../lib/api";
 
-type PageParams = {
+interface Props {
   params: { id: string };
 };
 
-export default async function NoteModalPage({ params }: PageParams) {
+const NoteModalPage = async ({ params }: Props) => {
   const note = await fetchNoteById(params.id);
   return <NoteClient note={note} />;
 }
+
+export default NoteModalPage;
