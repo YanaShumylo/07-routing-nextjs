@@ -3,12 +3,14 @@ import css from "../../../../components/NotesPage/NotesPage.module.css";
 import { fetchNotes } from "../../../../lib/api";
 import NotesClient from "./Notes.client";
 
-interface Props {
-  params: { slug?: string[] };
+
+interface NoteDetailsProps {
+  params:Promise< { slug?: string[] }>;
 }
 
-export default async function NotesPage({ params }: Props) {
-  const tag = params.slug?.[0] === "all" ? undefined : params.slug?.[0];
+export default async function NotesPage({ params }: NoteDetailsProps) {
+  const { slug } = await params;
+  const tag = slug?.[0] === "all" ? undefined : slug?.[0];
 
   const initialData = await fetchNotes({
     tag,
