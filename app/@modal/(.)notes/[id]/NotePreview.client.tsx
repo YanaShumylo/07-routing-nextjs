@@ -1,4 +1,3 @@
-// import { fetchNoteById } from "@/lib/api";
 import css from "../../../../components/NotePreview/NotePreview.module.css";
 
 type Note = {

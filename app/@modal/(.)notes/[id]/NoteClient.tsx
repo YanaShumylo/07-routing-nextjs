@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Modal from "../../../../components/Modal/Modal";
-import NotePreview from "./NotePreview";
+import NotePreview from "./NotePreview.client";
 
 type Props = {
   note: {
