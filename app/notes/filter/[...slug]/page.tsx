@@ -10,7 +10,7 @@ interface NoteDetailsProps {
 
 export default async function NotesPage({ params }: NoteDetailsProps) {
   const { slug } = await params;
-  const tag = slug?.[0] === "all" ? undefined : slug?.[0];
+  const tag = slug?.[0].toLowerCase() === "all" ? undefined : slug?.[0];
 
   const initialData = await fetchNotes({
     tag,
