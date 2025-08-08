@@ -30,6 +30,8 @@ export default function NotesClient({ initialData, tag }: NotesClientProps) {
     setCurrentPage(1);
   }, [search]);
 
+  const isInitial = currentPage === 1 && search === "";
+
   const {
     data,
     isLoading,
@@ -45,10 +47,12 @@ export default function NotesClient({ initialData, tag }: NotesClientProps) {
       perPage: 12,
     }),
     placeholderData: (previousData) => previousData,
-    initialData: currentPage === 1 && debouncedSearch === "" ? initialData : undefined,
+    initialData: isInitial ? initialData : undefined,
 });
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
+
+  const notes = data?.data ?? [];
 
   return (
     <div className={css.app}>
@@ -72,10 +76,12 @@ export default function NotesClient({ initialData, tag }: NotesClientProps) {
 
       {isError && <ErrorMessage error={error as Error} />}
       
-      {data?.data && data.data.length > 0 && (
-        <NoteList notes={data.data}/>
+      {!isLoading && !isFetching && notes.length === 0 && (
+        <p className={css.empty}>No notes found.</p>
       )}
 
+      {notes.length > 0 && <NoteList notes={notes} />}
+     
       {isModalOpen && (
         <Modal onClose={handleCloseModal}>
           <NoteForm onClose={handleCloseModal} />
